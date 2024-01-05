@@ -13,8 +13,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  @override
   bool opacidade = true;
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
@@ -24,17 +25,18 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Flutter: Primeiros Passos'),
-          leading: Icon(Icons.add_task),
+          leading: const Icon(Icons.add_task),
         ),
         body: AnimatedOpacity(
           opacity: opacidade ? 1.0 : 0.0,
           duration: const Duration(milliseconds: 500),
           child: Container(
-            color: Color.fromARGB(255, 208, 221, 237),
+            color: const Color.fromARGB(255, 208, 221, 237),
             child: ListView(
               children: const [
-                Padding(//aula 5.4
-                  padding: EdgeInsets.only(top:8),
+                Padding(
+                  //aula 5.4
+                  padding: EdgeInsets.only(top: 8),
                   child: Tasks(
                       'Estudar Flutter',
                       'https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large',
@@ -52,8 +54,10 @@ class _MyAppState extends State<MyApp> {
                     'Meditar',
                     'https://manhattanmentalhealthcounseling.com/wp-content/uploads/2019/06/Top-5-Scientific-Findings-on-MeditationMindfulness-881x710.jpeg',
                     4),
-                Tasks('Jogar',
-                    'https://i.ibb.co/tB29PZB/kako-epifania-2022-2-c-pia.jpg', 0),
+                Tasks(
+                    'Jogar',
+                    'https://i.ibb.co/tB29PZB/kako-epifania-2022-2-c-pia.jpg',
+                    0),
                 SizedBox(
                   height: 100,
                 ),
@@ -100,115 +104,122 @@ class _TasksState extends State<Tasks> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                color: Colors.blue,
-              ),
-              height: 140,
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: Colors.blue,
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    color: Colors.white,
-                  ),
-                  height: 100,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.black12,
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: Image.network(
-                            widget.foto,
-                            height: 100,
-                            width: 72,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 200,
-                            child: Text(
-                              widget.nome,
-                              style: const TextStyle(
-                                  fontSize: 24,
-                                  overflow: TextOverflow.ellipsis),
-                            ),
-                          ),
-                          Difficulty(widget.dificuldade),
-                          // vai ser um novo componente.
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          height: 52,
-                          width: 52,
-                          child: ElevatedButton(
-                            onPressed: levelUp,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: const [
-                                Icon(Icons.arrow_drop_up),
-                                Text(
-                                  'UP',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+            height: 140,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: Colors.white,
                 ),
-                Row(
+                height: 100,
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 8,
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: Colors.black12,
                       ),
-                      child: Container(
-                        width: 200,
-                        child: LinearProgressIndicator(
-                          color: Colors.white,
-                          value: widget.dificuldade > 0
-                              ? ((level / widget.dificuldade) / 10)
-                              : 1,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: Image.network(
+                          widget.foto,
+                          height: 100,
+                          width: 72,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 200,
+                          child: Text(
+                            widget.nome,
+                            style: const TextStyle(
+                                fontSize: 24, overflow: TextOverflow.ellipsis),
+                          ),
+                        ),
+                        Difficulty(widget.dificuldade),
+                        // vai ser um novo componente.
+                      ],
+                    ),
                     Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        'Nivel: $level',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      padding: const EdgeInsets.all(16.0),
+                      child: SizedBox(
+                        height: 37,
+                        width: 38,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.blue),
+                            shape: MaterialStateProperty.all(
+                              const RoundedRectangleBorder(
+                                borderRadius: BorderRadius
+                                    .zero,
+                              ),
+                            ),
+                          ),
+                          onPressed: levelUp,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Icon(Icons.arrow_drop_up),
+                              Text(
+                                'UP',
+                                style: TextStyle(fontSize: 12),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                    ),
+                    child: SizedBox(
+                      width: 200,
+                      child: LinearProgressIndicator(
+                        color: Colors.white,
+                        value: widget.dificuldade > 0
+                            ? ((level / widget.dificuldade) / 10)
+                            : 1,
                       ),
                     ),
-                  ],
-                )
-              ],
-            ),
-          ],
-        ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      'Nivel: $level',
+                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -221,27 +232,19 @@ class Difficulty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(//aula 5.4
-      child: Row(
-        children: [
-          Icon(Icons.star,
-              size: 15,
-              color: (dificulty >= 1) ? Colors.blue : Colors.blue[100]),
-          Icon(Icons.star,
-              size: 15,
-              color: (dificulty >= 2) ? Colors.blue : Colors.blue[100]),
-          Icon(Icons.star,
-              size: 15,
-              color: (dificulty >= 3) ? Colors.blue : Colors.blue[100]),
-          Icon(Icons.star,
-              size: 15,
-              color: (dificulty >= 4) ? Colors.blue : Colors.blue[100]),
-          Icon(Icons.star,
-              size: 15,
-              color: (dificulty >= 5) ? Colors.blue : Colors.blue[100]),
-        ],
-      ),
+    return Row(
+      children: [
+        Icon(Icons.star,
+            size: 15, color: (dificulty >= 1) ? Colors.blue : Colors.blue[100]),
+        Icon(Icons.star,
+            size: 15, color: (dificulty >= 2) ? Colors.blue : Colors.blue[100]),
+        Icon(Icons.star,
+            size: 15, color: (dificulty >= 3) ? Colors.blue : Colors.blue[100]),
+        Icon(Icons.star,
+            size: 15, color: (dificulty >= 4) ? Colors.blue : Colors.blue[100]),
+        Icon(Icons.star,
+            size: 15, color: (dificulty >= 5) ? Colors.blue : Colors.blue[100]),
+      ],
     );
   }
 }
-
